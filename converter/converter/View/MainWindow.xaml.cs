@@ -12,8 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net;
+using System.IO;
+using System.Xml;
+using Microsoft.Practices.Prism.Mvvm;
+using converter.ViewModel;
 
-namespace converter
+
+namespace converter.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +29,16 @@ namespace converter
         public MainWindow()
         {
             InitializeComponent();
+
+            try
+            {
+                MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
+                this.DataContext = mainWindowViewModel;
+            }
+            catch (ConstructorAbortedException)
+            {
+                System.Environment.Exit(0);
+            }
         }
     }
 }
